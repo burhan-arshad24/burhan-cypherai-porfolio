@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import aboutImage from '../assets/about_section/about_section.png';
+import aboutImage from '../assets/about_section/about_section.mp4';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -80,27 +80,27 @@ const aboutWords = [
   { text: 'on' },
 
   {
-    text: 'Machine Learning',
+    text: 'Machine Learning,',
     className: 'text-white font-medium',
   },
   {
-    text: 'Deep Learning',
+    text: 'Deep Learning,',
     className: 'text-white font-medium',
   },
   {
-    text: 'Generative AI',
+    text: 'Generative AI,',
     className: 'text-white font-medium',
   },
   {
-    text: 'Agentic AI',
+    text: 'Agentic AI,',
     className: 'text-white font-medium',
   },
   {
-    text: 'NLP',
+    text: 'NLP,',
     className: 'text-white font-medium',
   },
   {
-    text: 'Computer Vision',
+    text: 'Computer Vision.',
     className: 'text-white font-medium',
   },
   { text: 'and' },
@@ -538,9 +538,12 @@ const About = () => {
                   AI / ML DEVELOPER
                 </div>
 
-                <img
+                <video
                   src={aboutImage}
-                  alt="Burhan Arshad"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
                   className="
                     relative
                     w-64

@@ -57,22 +57,26 @@ const Expertise = () => {
     const cards = cardRefs.current;
     if (!cards.length) return;
 
-    cards.forEach((card, index) => {
-      if (index === cards.length - 1) return;
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
 
-      gsap.to(card, {
-        scale: 0.92 - index * 0.025,
-        y: -15 - index * 8,
-        filter: "blur(6px)",
-        opacity: 0.4,
-        scrollTrigger: {
-          trigger: card,
-          start: `top ${90 + index * 20}px`,
-          end: "bottom top",
-          scrub: true,
-        }
+    if (!isMobile) {
+      cards.forEach((card, index) => {
+        if (index === cards.length - 1) return;
+
+        gsap.to(card, {
+          scale: 0.92 - index * 0.025,
+          y: -15 - index * 8,
+          filter: "blur(6px)",
+          opacity: 0.4,
+          scrollTrigger: {
+            trigger: card,
+            start: `top ${90 + index * 20}px`,
+            end: "bottom top",
+            scrub: true,
+          }
+        });
       });
-    });
+    }
 
     const handleMouseMove = (e, card) => {
       const rect = card.getBoundingClientRect();
@@ -90,10 +94,16 @@ const Expertise = () => {
 
       card.addEventListener('mousemove', listener);
 
-      return () => card.removeEventListener('mousemove', listener);
+      card._mouseMoveListener = listener;
     });
 
     return () => {
+      cards.forEach((card) => {
+        if (card?._mouseMoveListener) {
+          card.removeEventListener('mousemove', card._mouseMoveListener);
+        }
+      });
+
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
